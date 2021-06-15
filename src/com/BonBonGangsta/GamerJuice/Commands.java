@@ -52,11 +52,14 @@ public class Commands extends ListenerAdapter {
                 String[] statuses = {
                         "I'm Alive!!!!",
                         "*cracks open a redbull* You already know",
-                        "Be usefull and hand me a Gamer Juice Sweetie",
+                        "Be useful and hand me a Gamer Juice ",
                         "If my numbers are correct... I'm alive.",
-                        "I'm here",
-                        "Just like you, I am alive, but we all know deep down, we are all dead inside",
-                        "Well hello there..."};
+                        "I'm here.",
+                        "Just like you, I am alive, but we all know deep down, we are all dead inside.",
+                        "Well hello there...",
+                        "I know what you are thinking, yes, I am alive.",
+                        "Selfdestruction mode has been disabled.",
+                        "*cracks open a Monster* It's boomer juice time."};
                 Random rand = new Random();
                 int number = rand.nextInt(statuses.length);
                 event.getChannel().sendMessage(statuses[number]).queue();
