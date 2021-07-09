@@ -41,7 +41,7 @@ public class Commands extends ListenerAdapter {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                assert doc != null;
+                //assert doc != null;
                 Element content = doc.getElementById("content");
                 //System.out.println(content.text());
                 event.getChannel().sendMessage(content.text() + " 👀").queue();
@@ -58,7 +58,7 @@ public class Commands extends ListenerAdapter {
                         "Just like you, I am alive, but we all know deep down, we are all dead inside.",
                         "Well hello there...",
                         "I know what you are thinking, yes, I am alive.",
-                        "Selfdestruction mode has been disabled.",
+                        "Self destruction mode has been disabled.",
                         "*cracks open a Monster* It's boomer juice time."};
                 Random rand = new Random();
                 int number = rand.nextInt(statuses.length);
