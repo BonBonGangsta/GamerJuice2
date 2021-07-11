@@ -9,6 +9,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
+import java.lang.annotation.ElementType;
 import java.util.Objects;
 import java.util.Random;
 
@@ -34,19 +35,17 @@ public class Commands extends ListenerAdapter {
                 event.getChannel().sendMessage("I swear to god " + Objects.requireNonNull(event.getMember()).getAsMention() + ", I will rearrange your organs.").queue();
             }
 
-            if (args[0].equalsIgnoreCase(GamerJuice.prefix + "pickup")) {
+            if (args[0].equalsIgnoreCase(GamerJuice.prefix + "Kanye")){
                 Document doc = null;
                 try {
-                    doc = Jsoup.connect("https://www.pickuplinegen.com/").get();
-                } catch (IOException e) {
+                    doc = Jsoup.connect("https://api.kanye.rest").get();
+                } catch (IOException e){
                     e.printStackTrace();
                 }
-                //assert doc != null;
-                Element content = doc.getElementById("content");
-                //System.out.println(content.text());
-                event.getChannel().sendMessage(content.text() + " 👀").queue();
-
+                Element quote = doc.getElementById("quote");
+                event.getChannel().sendMessage(quote.text() +  "- Kanye").queue();
             }
+
 
             if (args[0].equalsIgnoreCase(GamerJuice.prefix + "status")){
                 String[] statuses = {
