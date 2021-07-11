@@ -32,7 +32,7 @@ public class Commands extends ListenerAdapter {
 
             if (args[0].equalsIgnoreCase(GamerJuice.prefix + "Help")) {
 
-                event.getChannel().sendMessage("I swear to god " + Objects.requireNonNull(event.getMember()).getAsMention() + ", I will rearrange your organs.").queue();
+                event.getChannel().sendMessage("Have you tried turning it off and on again, " + Objects.requireNonNull(event.getMember()).getAsMention() + "?").queue();
             }
 
             if (args[0].equalsIgnoreCase(GamerJuice.prefix + "Kanye")){
