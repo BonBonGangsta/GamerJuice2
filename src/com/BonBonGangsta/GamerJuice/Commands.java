@@ -1,5 +1,10 @@
 package com.BonBonGangsta.GamerJuice;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonObject;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
@@ -9,9 +14,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.annotation.ElementType;
+import java.net.*;
 import java.util.Objects;
 import java.util.Random;
+import java.util.Scanner;
 
 
 public class Commands extends ListenerAdapter {
@@ -36,14 +45,15 @@ public class Commands extends ListenerAdapter {
             }
 
             if (args[0].equalsIgnoreCase(GamerJuice.prefix + "Kanye")){
-                Document doc = null;
-                try {
-                    doc = Jsoup.connect("https://api.kanye.rest").get();
-                } catch (IOException e){
+                URL kanyeQuotes = new URL("http://api.kanye.rest");
+                String quote;
+                try{
+                    JsonObject json = new JsonObject(kanyeQuotes.openStream());
+                    quote = (String) json.get("quote");
+                } catch (JsonIOException | IOException e){
                     e.printStackTrace();
                 }
-                Element quote = doc.getElementById("quote");
-                event.getChannel().sendMessage(quote.text() +  "- Kanye").queue();
+                event.getChannel().sendMessage(quote +  "- Kanye").queue();
             }
 
 
