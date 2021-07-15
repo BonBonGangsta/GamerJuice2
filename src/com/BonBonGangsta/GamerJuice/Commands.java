@@ -75,8 +75,9 @@ public class Commands extends ListenerAdapter {
 
                 } catch(Exception e){
                     System.out.println(e.getStackTrace());
+                }finally {
+                    event.getChannel().sendMessage("Bleach!").queue();
                 }
-                event.getChannel().sendMessage("Bleach!").queue();
             }
 
 
