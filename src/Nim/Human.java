@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * @author byrondepaz
  */
 public class Human implements Player {
-    private String name; // name of player
+    private final String name; // name of player
     private int marblesTaken; // total number of marbles taken in a game
     private final String race = "HUM"; // the best race, the human race
     
@@ -54,7 +54,7 @@ public class Human implements Player {
        if(pile > 2) 
        {
        String input; 
-       int maxRemoval = (int) (pile / 2); //force int
+       int maxRemoval = pile / 2; //force int
        // ask the user for a value between 1 and the maximum removal
        input = JOptionPane.showInputDialog("please enter the number of objects"
                   + " you would like to remove from the pile? 1 through "

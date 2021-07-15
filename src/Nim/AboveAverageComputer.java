@@ -10,7 +10,7 @@ import java.util.Random;
  * of the number left in the pile.
  */
 public class AboveAverageComputer implements Player {
-    private String name ; // name of the AboveAverageComputer player.
+    private final String name ; // name of the AboveAverageComputer player.
     private int marblesTaken ; // total number of marbles taken.
     private final String race = "AAC"; //AboveAverageComputer Race
     /**
@@ -47,7 +47,7 @@ public class AboveAverageComputer implements Player {
             Random answer = new Random();
             // generate the upper bound of for the random # number which is
             // half of the number in the pile.
-            int maxRemoval = (int) (pile / 2) ;
+            int maxRemoval = pile / 2;
             // the minimum is 1 and half the pile.
             marbles = answer.nextInt(maxRemoval - 1) + 1 ;
             // add the number generated to the number to the number

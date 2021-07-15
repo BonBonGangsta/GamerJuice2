@@ -1,22 +1,16 @@
 package com.BonBonGangsta.GamerJuice;
 
+
+import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonObject;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.annotation.ElementType;
+import javax.net.ssl.HttpsURLConnection;
+import java.lang.runtime.ObjectMethods;
 import java.net.*;
 import java.util.Objects;
 import java.util.Random;
@@ -41,23 +35,52 @@ public class Commands extends ListenerAdapter {
 
             if (args[0].equalsIgnoreCase(GamerJuice.prefix + "Help")) {
 
-                event.getChannel().sendMessage("Have you tried turning it off and on again, " + Objects.requireNonNull(event.getMember()).getAsMention() + "?").queue();
+                event.getChannel().sendMessage("Have you tried turning it off and on again, " +
+                        Objects.requireNonNull(event.getMember()).getAsMention() + "?").queue();
             }
 
-            if (args[0].equalsIgnoreCase(GamerJuice.prefix + "Kanye")){
-                URL kanyeQuotes = new URL("http://api.kanye.rest");
-                String quote;
-                try{
-                    JsonObject json = new JsonObject(kanyeQuotes.openStream());
-                    quote = (String) json.get("quote");
-                } catch (JsonIOException | IOException e){
-                    e.printStackTrace();
+            if (args[0].equalsIgnoreCase(GamerJuice.prefix + "Kanye")) {
+                try {
+                    URL url;
+                    Scanner scanner;
+                    String inline = "";
+                    // create an HTTP connection
+                    HttpURLConnection conn;
+                    int responseCode;
+                    url = new URL("https://api.kanye.rest");
+                    conn = (HttpsURLConnection) url.openConnection();
+                    conn.setRequestMethod("GET");
+                    conn.connect();
+                    responseCode = conn.getResponseCode();
+                    System.out.println("Reponsecode: " + responseCode);
+                    if (responseCode != 200) {
+                        throw new RuntimeException();
+                    } else {
+                        scanner = new Scanner(url.openStream());
+                    }
+
+                    while (scanner.hasNext()) {
+                        inline += scanner.nextLine();
+                    }
+                    scanner.close();
+
+                    ObjectMapper mapper = new ObjectMapper();
+                    JsonNode kanyeJsonNode = mapper.readTree(inline);
+                    String message = kanyeJsonNode.get("quote").asText();
+
+                    System.out.println(message);
+                    event.getChannel().sendMessage(message).queue();
+                } catch(RuntimeException e){
+                    System.out.println("HttpResponseCode: is not good" + e.getStackTrace());
+
+                } catch(Exception e){
+                    System.out.println(e.getStackTrace());
                 }
-                event.getChannel().sendMessage(quote +  "- Kanye").queue();
+                event.getChannel().sendMessage("Bleach!").queue();
             }
 
 
-            if (args[0].equalsIgnoreCase(GamerJuice.prefix + "status")){
+            if (args[0].equalsIgnoreCase(GamerJuice.prefix + "status")) {
                 String[] statuses = {
                         "I'm Alive!!!!",
                         "*cracks open a redbull* You already know",
@@ -72,7 +95,7 @@ public class Commands extends ListenerAdapter {
                 Random rand = new Random();
                 int number = rand.nextInt(statuses.length);
                 event.getChannel().sendMessage(statuses[number]).queue();
-                }
             }
         }
     }
+}

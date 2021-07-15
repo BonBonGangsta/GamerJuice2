@@ -9,9 +9,9 @@ import java.util.ArrayList;
  * @author bydepa
  */
 public class SuperComputerPlayer implements Player {
-    private String name ; // string of name.
+    private final String name ; // string of name.
     private int marblesTaken ; // total number of objects taken from the pile.
-    private ArrayList<Integer> key; // Array list of key answers.
+    private final ArrayList<Integer> key; // Array list of key answers.
     private final String race = "SCP"; // SuperComputer Race
     
     /**

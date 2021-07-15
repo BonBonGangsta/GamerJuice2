@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="GamerJuice:jar">
+  <artifact type="jar" build-on-make="true" name="GamerJuice:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/GamerJuice_jar</output-path>
     <root id="archive" name="GamerJuice.jar">
       <element id="module-output" name="GamerJuice" />
@@ -7,6 +7,7 @@
       <element id="extracted-dir" path="$USER_HOME$/Documents/JDA-4.2.1_265-withDependencies.jar" path-in-jar="/" />
       <element id="library" level="project" name="jsoup-1.13.1" />
       <element id="library" level="project" name="JDA-4.2.1_265-withDependencies" />
+      <element id="library" level="project" name="com.fasterxml.jackson.core:jackson-core:2.13.0-rc1" />
     </root>
   </artifact>
 </component>
