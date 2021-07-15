@@ -29,15 +29,11 @@ public class Commands extends ListenerAdapter {
                 info.setColor(0xFF1493);
                 event.getChannel().sendMessage(info.build()).queue();
                 info.clear();
-            }
-
-            if (args[0].equalsIgnoreCase(GamerJuice.prefix + "Help")) {
+            } else if (args[0].equalsIgnoreCase(GamerJuice.prefix + "Help")) {
 
                 event.getChannel().sendMessage("Have you tried turning it off and on again, " +
                         Objects.requireNonNull(event.getMember()).getAsMention() + "?").queue();
-            }
-
-            if (args[0].equalsIgnoreCase(GamerJuice.prefix + "Kanye")) {
+            } else if (args[0].equalsIgnoreCase(GamerJuice.prefix + "Kanye")) {
                 try {
                     URL url;
                     Scanner scanner;
@@ -50,7 +46,6 @@ public class Commands extends ListenerAdapter {
                     conn.setRequestMethod("GET");
                     conn.connect();
                     responseCode = conn.getResponseCode();
-                    System.out.println("Reponsecode: " + responseCode);
                     if (responseCode != 200) {
                         throw new RuntimeException();
                     } else {
@@ -65,21 +60,15 @@ public class Commands extends ListenerAdapter {
                     ObjectMapper mapper = new ObjectMapper();
                     JsonNode kanyeJsonNode = mapper.readTree(inline);
                     String message = kanyeJsonNode.get("quote").asText();
-
-                    System.out.println(message);
-                    event.getChannel().sendMessage(message).queue();
-                } catch(RuntimeException e){
+                    event.getChannel().sendMessage(message + " - Kanye").queue();
+                } catch (RuntimeException e) {
                     System.out.println("HttpResponseCode: is not good" + e.getStackTrace());
 
-                } catch(Exception e){
+                } catch (Exception e) {
                     System.out.println(e.getStackTrace());
-                }finally {
-                    event.getChannel().sendMessage("Bleach!").queue();
                 }
-            }
 
-
-            if (args[0].equalsIgnoreCase(GamerJuice.prefix + "status")) {
+            } else if (args[0].equalsIgnoreCase(GamerJuice.prefix + "status")) {
                 String[] statuses = {
                         "I'm Alive!!!!",
                         "*cracks open a redbull* You already know",

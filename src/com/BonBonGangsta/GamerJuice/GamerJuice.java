@@ -16,7 +16,7 @@ public class GamerJuice {
     public static void main(String[] args) throws LoginException{
         jda = JDABuilder.createDefault("ODQ2ODY5NzgzNjkyNzA1ODIz.YK1y8g.rYNmtTNN77ejUeTytZ5wLWAPuk4").build();
         jda.getPresence().setStatus(OnlineStatus.ONLINE);
-        jda.getPresence().setActivity(Activity.watching("BonBon fail at life."));
+        jda.getPresence().setActivity(Activity.watching("This final project unfold into chaos."));
 
         jda.addEventListener(new Commands());
 
