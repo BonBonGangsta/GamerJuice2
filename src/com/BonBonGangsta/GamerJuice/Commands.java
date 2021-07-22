@@ -1,4 +1,4 @@
-package com.BonBonGangsta.GamerJuice;
+/*package com.BonBonGangsta.GamerJuice;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -87,3 +87,4 @@ public class Commands extends ListenerAdapter {
         }
     }
 }
+*/

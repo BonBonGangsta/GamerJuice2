@@ -1,14 +1,13 @@
 package com.BonBonGangsta.GamerJuice;
 
+import listener.CommandListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import javax.security.auth.login.LoginException;
 import java.io.File;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -20,7 +19,7 @@ public class GamerJuice {
     // Main method, will start when the bot starts
     public static void main(String[] args) throws LoginException{
 
-        /**
+        /*
          * Get the token from file.
          */
         String token = null;
@@ -53,7 +52,12 @@ public class GamerJuice {
         jda.getPresence().setStatus(OnlineStatus.ONLINE);
         jda.getPresence().setActivity(Activity.watching("This final project unfold into chaos."));
 
-        jda.addEventListener(new Commands());
+        jda.addEventListener(new CommandListener());
 
+
+    }
+
+    public static void debug(String logs){
+        System.out.println("[DEBUG] " + logs);
     }
 }
