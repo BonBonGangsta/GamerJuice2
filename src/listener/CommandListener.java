@@ -1,27 +1,37 @@
 package listener;
 
-import Commands.helpCommand;
+import API.Kanye;
+import Commands.statusCommand;
 import Commands.infoCommand;
 import com.BonBonGangsta.GamerJuice.GamerJuice;
+import entity.APIs;
 import entity.Command;
 import event.commandEvent;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.api.hooks.EventListener;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.jetbrains.annotations.NotNull;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class CommandListener {
+public class CommandListener extends ListenerAdapter {
     private static final HashMap<String, Command> commands = new HashMap<>();
+    private static final HashMap<String, APIs> apis = new HashMap<>();
 
-    public CommandListener(){
-        List<Command> botCommands = new ArrayList<>(Arrays.asList(new infoCommand(), new helpCommand()));
+    public CommandListener() throws MalformedURLException {
+        List<Command> botCommands = new ArrayList<>(Arrays.asList(new infoCommand(), new statusCommand()));
+        List<APIs> apiCommands = new ArrayList<>(Arrays.asList(new Kanye()));
         for(Command command: botCommands) commands.put(command.getName().toLowerCase(), command);
+        for(APIs api: apiCommands) apis.put(api.getName().toLowerCase(), api);
         System.out.println("[INFO] loaded " + commands.size() + " commands.");
     }
 
@@ -37,14 +47,17 @@ public class CommandListener {
                     rawMessage.equals("<@!" + event.getJDA().getSelfUser().getId() + ">");
             String prefix = GamerJuice.prefix;
             String arg = args[0].toLowerCase();
-            boolean isCommand;
+            GamerJuice.debug(arg.toString());
+            boolean isCommand = false;
+            boolean isAPICall = false;
             if(isMention) isCommand = true;
             else{
                 String CommandName = arg.substring(prefix.length()).toLowerCase();
                 isCommand = commands.containsKey(CommandName);
-                if (isCommand) arg = CommandName;
+                isAPICall = apis.containsKey(CommandName);
+                if (isCommand || isAPICall) arg = CommandName;
             }
-            if (isCommand){
+            if (isCommand || isAPICall){
                 GamerJuice.debug("Command recieved: " + arg);
                 Command command = commands.get(arg);
                 if (isMention) command = commands.get("info");
@@ -61,4 +74,5 @@ public class CommandListener {
 
 
     }
+
 }

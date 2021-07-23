@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.entities.Activity;
 
 import javax.security.auth.login.LoginException;
 import java.io.File;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
@@ -17,12 +18,14 @@ public class GamerJuice {
     public static String prefix = "~";
 
     // Main method, will start when the bot starts
-    public static void main(String[] args) throws LoginException{
+    public static void main(String[] args) throws LoginException, MalformedURLException {
 
         /*
          * Get the token from file.
          */
         String token = null;
+
+        debug("GamerBot has initiated. *cracks open a redbull* it's about to go down!");
 
         try{
             File tokenFile = Paths.get("token.txt").toFile();
@@ -51,8 +54,9 @@ public class GamerJuice {
         jda = JDABuilder.createDefault(token).build();
         jda.getPresence().setStatus(OnlineStatus.ONLINE);
         jda.getPresence().setActivity(Activity.watching("This final project unfold into chaos."));
-
+        debug("Bot has completed it's start up.");
         jda.addEventListener(new CommandListener());
+        debug("CommandListener has completed. Hopefully");
 
 
     }
