@@ -1,6 +1,7 @@
 package listener;
 
 import API.Kanye;
+import API.Shiba;
 import Commands.statusCommand;
 import Commands.infoCommand;
 import com.BonBonGangsta.GamerJuice.GamerJuice;
@@ -29,7 +30,7 @@ public class CommandListener extends ListenerAdapter {
 
     public CommandListener() throws MalformedURLException {
         List<Command> botCommands = new ArrayList<>(Arrays.asList(new infoCommand(), new statusCommand()));
-        List<APIs> apiCommands = new ArrayList<>(Arrays.asList(new Kanye()));
+        List<APIs> apiCommands = new ArrayList<>(Arrays.asList(new Kanye(), new Shiba()));
         for(Command command: botCommands) commands.put(command.getName().toLowerCase(), command);
         for(APIs api: apiCommands) apis.put(api.getName().toLowerCase(), api);
         System.out.println("[INFO] loaded " + commands.size() + " commands.");

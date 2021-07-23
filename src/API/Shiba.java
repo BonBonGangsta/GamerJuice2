@@ -1,5 +1,6 @@
 package API;
 
+import com.BonBonGangsta.GamerJuice.GamerJuice;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entity.APIs;
@@ -12,24 +13,20 @@ import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Scanner;
 
-public class Kanye extends APIs {
-
+public class Shiba extends APIs {
     private static URL apiURL = null;
-
     static {
-        try {
-            apiURL = new URL("https://api.kanye.rest");
-        } catch (MalformedURLException e) {
+        try{
+            apiURL = new URL("http://shibe.online/api/shibes?count=1&urls=true");
+        }catch (MalformedURLException e){
             e.printStackTrace();
         }
     }
 
+    private String inline = "";
 
-    private String inline ="";
-
-
-    public Kanye() throws MalformedURLException {
-        super("Kanye", apiURL);
+    public Shiba() throws MalformedURLException{
+        super("Shiba" , apiURL);
     }
 
     @Override
@@ -59,14 +56,14 @@ public class Kanye extends APIs {
             }
             // close the scanner file to free up memory
             scanner.close();
+            GamerJuice.debug(inline);
+            // since this API only returns one string of for the image of the Shiba of the day or random shiba,
+            // we will just remove the first 2 number and the last two
+            String message = inline.substring(2,inline.length()-2);
+            GamerJuice.debug("Execting API call command: Shiba image given is linked here " + message);
 
-            // create a Object mapper to parse through the text that we received and create a tree
-            // then from the tree we can conver to a JSON Node and from JSON node to the data we need.
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode kanyeJsonNode = mapper.readTree(inline);
-            String message = kanyeJsonNode.get("quote").asText();
-            // finally respond with the quote from Yezzy himself
-            event.reply(message + " -Kanye");
+
+            event.reply(message);
 
         } catch (ProtocolException e) {
             e.printStackTrace();
@@ -74,5 +71,4 @@ public class Kanye extends APIs {
             e.printStackTrace();
         }
     }
-
 }
