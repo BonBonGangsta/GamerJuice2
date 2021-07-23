@@ -17,7 +17,8 @@ public class infoCommand extends Command {
         EmbedBuilder info = new EmbedBuilder();
         info.setTitle("GamerJuice Bot Information");
         info.setDescription("This bot is using Java and was built to play game(s)");
-        info.addField("Commands available currently:",GamerJuice.prefix + "Kanye will trigger a quote from Yeezus himself.", false);
+        info.addField("Commands available currently:",GamerJuice.prefix + "Kanye will trigger a quote from Yeezus himself." +
+                "\n" + GamerJuice.prefix + "Shiba will give you a random shiba image to brighten your day", false);
         info.addField("Creator", "@BonBonGangsta", false);
         info.addField("Note", "If you see this, you owe my creator a Redbull (12 oz)", false);
         info.setColor(0xFF1493);

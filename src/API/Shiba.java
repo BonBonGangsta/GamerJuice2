@@ -56,15 +56,17 @@ public class Shiba extends APIs {
             }
             // close the scanner file to free up memory
             scanner.close();
-            GamerJuice.debug(inline);
-            // since this API only returns one string of for the image of the Shiba of the day or random shiba,
-            // we will just remove the first 2 number and the last two
-            String message = inline.substring(2,inline.length()-2);
-            GamerJuice.debug("Execting API call command: Shiba image given is linked here " + message);
+            if(inline != null) {
+                GamerJuice.debug(inline);
+                // since this API only returns one string of for the image of the Shiba of the day or random shiba,
+                // we will just remove the first 2 and last two chars.
+                // converting ["https://imageurl.com/idofimage"] to https://imageurl.com/idofimage
+                String message = inline.substring(2, inline.length() - 2);
+                GamerJuice.debug("Execting API call command: Shiba image given is linked here " + message);
+                event.reply("Here is a Shiba to brighten your day!" + event.getAuthor().getAsMention());
 
-
-            event.reply(message);
-
+                event.reply(message);
+            }
         } catch (ProtocolException e) {
             e.printStackTrace();
         } catch (IOException e) {
