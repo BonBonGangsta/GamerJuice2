@@ -59,14 +59,24 @@ public class CommandListener extends ListenerAdapter {
             }
             if (isCommand || isAPICall){
                 GamerJuice.debug("Command recieved: " + arg);
-                Command command = commands.get(arg);
-                if (isMention) command = commands.get("info");
-                if (command == null){
-                    GamerJuice.debug("Executing command: " + arg);
-                    return;
+                Command command = null;
+                APIs apiCall;
+                if(isCommand){
+                    if (isMention) command = commands.get("info");
+                    else command = commands.get(arg);
+                    GamerJuice.debug("Execting command: " + arg);
+                    command.execute(new commandEvent(event, Arrays.copyOfRange(rawMessage.split("\\s+"),1, args.length)));
                 }
-                GamerJuice.debug("Execting command: " + arg);
-                command.execute(new commandEvent(event, Arrays.copyOfRange(rawMessage.split("\\s+"),1, args.length)));
+                else if(isAPICall){
+                    apiCall = apis.get(arg);
+                    GamerJuice.debug("Execting API call command: " + arg);
+                    apiCall.execute(new commandEvent(event, Arrays.copyOfRange(rawMessage.split("\\s+"),1, args.length)));
+                }
+                
+                if (command == null){
+                    GamerJuice.debug("Executing null command: " + arg);
+                }
+                
             }
         }
 
