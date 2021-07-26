@@ -1,6 +1,6 @@
 package entity;
 
-import event.commandEvent;
+import event.CommandEvent;
 
 import java.net.URL;
 
@@ -15,6 +15,6 @@ public abstract class APIs {
         return name;
     }
 
-    public abstract void execute(commandEvent commandEvent);
+    public abstract void execute(CommandEvent commandEvent);
 
 }

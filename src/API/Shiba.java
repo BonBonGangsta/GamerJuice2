@@ -1,10 +1,8 @@
 package API;
 
 import com.BonBonGangsta.GamerJuice.GamerJuice;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import entity.APIs;
-import event.commandEvent;
+import event.CommandEvent;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -23,14 +21,12 @@ public class Shiba extends APIs {
         }
     }
 
-    private String inline = "";
-
     public Shiba() throws MalformedURLException{
         super("Shiba" , apiURL);
     }
 
     @Override
-    public void execute(commandEvent event){
+    public void execute(CommandEvent event){
         try{
             // create an HTTP connection
             HttpURLConnection conn;
@@ -49,7 +45,7 @@ public class Shiba extends APIs {
                 // converting it to a JSON object and then retrieving our data.
                 scanner = new Scanner(apiURL.openStream());
             }
-
+            String inline = "";
             // while there is text in the Scanner, create a large string of all the text
             while(scanner.hasNext()){
                 inline += scanner.nextLine();

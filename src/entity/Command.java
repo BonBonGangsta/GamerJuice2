@@ -1,6 +1,6 @@
 package entity;
 
-import event.commandEvent;
+import event.CommandEvent;
 
 public abstract class Command {
 
@@ -14,6 +14,6 @@ public abstract class Command {
         return name;
     }
 
-    public abstract void execute(commandEvent commandEvent);
+    public abstract void execute(CommandEvent commandEvent);
 
 }

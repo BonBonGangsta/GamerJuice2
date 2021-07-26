@@ -3,7 +3,7 @@ package API;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entity.APIs;
-import event.commandEvent;
+import event.CommandEvent;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -24,16 +24,12 @@ public class Kanye extends APIs {
         }
     }
 
-
-    private String inline ="";
-
-
     public Kanye() throws MalformedURLException {
         super("Kanye", apiURL);
     }
 
     @Override
-    public void execute(commandEvent event){
+    public void execute(CommandEvent event){
         try{
             // create an HTTP connection
             HttpURLConnection conn;
@@ -52,7 +48,7 @@ public class Kanye extends APIs {
                 // converting it to a JSON object and then retrieving our data.
                 scanner = new Scanner(apiURL.openStream());
             }
-
+            String inline ="";
             // while there is text in the Scanner, create a large string of all the text
             while(scanner.hasNext()){
                 inline += scanner.nextLine();
@@ -61,7 +57,7 @@ public class Kanye extends APIs {
             scanner.close();
 
             // create a Object mapper to parse through the text that we received and create a tree
-            // then from the tree we can conver to a JSON Node and from JSON node to the data we need.
+            // then from the tree we can convert to a JSON Node and from JSON node to the data we need.
             ObjectMapper mapper = new ObjectMapper();
             JsonNode kanyeJsonNode = mapper.readTree(inline);
             String message = kanyeJsonNode.get("quote").asText();
