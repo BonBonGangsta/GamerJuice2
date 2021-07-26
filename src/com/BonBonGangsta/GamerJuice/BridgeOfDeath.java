@@ -95,7 +95,7 @@ public class BridgeOfDeath {
                     scanner = new Scanner(apiURL.openStream());
                 }
                 String inline = "";
-                GamerJuice.debug("inline has been created with the follwing: " + inline);
+                GamerJuice.debug("inline has been created with the following: " + inline);
                 // while there is text in the Scanner, create a large string of all the text
                 while (scanner.hasNext()) {
                     inline += scanner.nextLine();
