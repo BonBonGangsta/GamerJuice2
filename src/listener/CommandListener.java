@@ -40,7 +40,7 @@ public class CommandListener extends ListenerAdapter {
         for(BridgeOfDeath game: activeGames){
             if(game.getPlayer() != message.getAuthor()) continue;
             String choice = message.getContentRaw();
-            message.getChannel().sendMessage("choice give is : " + choice).queue();
+            //message.getChannel().sendMessage("choice give is : " + choice).queue();
             boolean gameWon = false;
             switch (game.getGameState()){
                 case GAME_CHOOSE:
@@ -148,8 +148,7 @@ public class CommandListener extends ListenerAdapter {
                     event.getChannel().sendMessage("What Game would you like to play?").queue();
                     BridgeOfDeath newGame = new BridgeOfDeath(event.getAuthor());
                     activeGames.add(newGame);
-                    event.getChannel().sendMessage("Game has been added with player " +
-                            newGame.getPlayer().getName()).queue();
+                    //event.getChannel().sendMessage("Game has been added with player " + newGame.getPlayer().getName()).queue();
                 }
                 
                 if (command == null){
