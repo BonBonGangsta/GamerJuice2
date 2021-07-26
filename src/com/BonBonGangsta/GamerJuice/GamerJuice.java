@@ -56,6 +56,7 @@ public class GamerJuice {
         jda.getPresence().setActivity(Activity.watching("This final project unfold into chaos."));
         debug("Bot has completed it's start up.");
         jda.addEventListener(new CommandListener());
+        //jda.addEventListener(new GameListener()); future framework to support multiple games
         debug("CommandListener has completed. Hopefully");
 
 
